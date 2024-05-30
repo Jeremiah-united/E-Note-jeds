@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "E-Note",
+    "slug": "E-Note",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/E-Note.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/E-Note.png",
+        "backgroundColor": "blue"
+      }
+    },
+    "web": {
+      "favicon": "./assets/E-Note.png"
+    }
+  }
+}
