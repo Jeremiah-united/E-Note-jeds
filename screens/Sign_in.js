@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, TouchableOpacity, Alert } from "react-native";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
+import { TextInput } from "react-native-gesture-handler";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase";  // Adjust the import path as necessary
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +14,7 @@ const Sign_in = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in
-                navigation.navigate('Modules_List');
+                navigation.navigate('CoursesList');
                 const user = userCredential.user;
                 Alert.alert("Success", "You have successfully signed in!");
             })
@@ -26,7 +26,7 @@ const Sign_in = () => {
     };
 
     return (
-        <ScrollView style={styles.signIn} contentContainerStyle={{ minHeight: 1000 }} >
+        <View style={styles.signIn}>
             <Text style={[styles.welcomeBack, styles.signLayout]}>Welcome Back</Text>
             <Text style={[styles.logInTo, styles.enterTypo1]}>Log in to your account</Text>
             <View style={[styles.signInInner, styles.signLayout]}>
@@ -57,10 +57,9 @@ const Sign_in = () => {
                 <View style={[styles.groupInner, styles.enterPosition]} />
                 <Text style={[styles.enter, styles.enterPosition]}>Enter</Text>
             </TouchableOpacity>
-        </ScrollView>
+        </View>
     );
 };
-
 const styles = StyleSheet.create({
     signPosition: {
     height: 60,

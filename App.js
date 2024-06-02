@@ -15,15 +15,17 @@ import NoteTest from './screens/TestNoter';
 
 import Notes from './screens/Notes';
 
-import ModulesList from './screens/Modules_List';
+import CoursesList from "./screens/CoursesList";
 
-import SubjectsList from "./screens/SubjectsList";
+import ModuleDetails from "./screens/ModuleDetails";
 
-import CoursesList from "./CoursesList";
+import CollectionViewer from "./screens/CollectionViewer";
+
+import ModuleInterface from "./screens/ModuleInterface";
+
+import Todo from "./screens/Todo";
 
 //import AndroidLarge3 from "./Schedule";
-
-//import AndroidLarge4 from "./To_Do";
 
 //import AndroidLarge5 from "./Goals";
 
@@ -44,8 +46,10 @@ const Stack = createNativeStackNavigator();
       <Stack.Screen component={NoteTest} name="TestNoter" />
       <Stack.Screen component={Notes} name="Notes" />
       <Stack.Screen component={CoursesList} name="CoursesList" />
-      <Stack.Screen component={ModulesList} name="Modules_List" />
-      <Stack.Screen component={SubjectsList} name="SubjectsList" />
+      <Stack.Screen component={CollectionViewer} name="CollectionViewer" />
+      <Stack.Screen component={ModuleDetails} name="ModuleDetails" />
+      <Stack.Screen component={ModuleInterface} name="ModuleInterface" />
+      <Stack.Screen component={Todo} name="Todo" />
     </Stack.Navigator>
     <StatusBar style="auto" />
   </NavigationContainer>
