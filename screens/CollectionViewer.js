@@ -1,4 +1,3 @@
-// CollectionViewer.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { ref, onValue } from 'firebase/database';
@@ -10,11 +9,11 @@ const CollectionViewer = () => {
   const route = useRoute();
   const [expandedYears, setExpandedYears] = useState({});
   const navigation = useNavigation();
-  const { path } = route.params;
+  const { course } = route.params;
 
   useEffect(() => {
     const fetchYears = () => {
-      const coursesRef = ref(database, path);
+      const coursesRef = ref(database, `Courses/${course}`);
       onValue(coursesRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
@@ -25,7 +24,7 @@ const CollectionViewer = () => {
     };
 
     fetchYears();
-  }, [path]);
+  }, [course]);
 
   const handleYearPress = (yearId) => {
     setExpandedYears(prevState => ({
@@ -40,28 +39,28 @@ const CollectionViewer = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>{path}</Text>
+      <Text style={styles.header}>{course}</Text>
       <FlatList
         data={years}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View>
             <TouchableOpacity onPress={() => handleYearPress(item.id)}>
-            <Text style={styles.yearText}>{item.id}</Text>
+              <Text style={styles.yearText}>{item.id}</Text>
             </TouchableOpacity>
             {expandedYears[item.id] && (
-            <FlatList
-              data={item.subjects}
-              keyExtractor={(subject, index) => index.toString()}
-              renderItem={({ item: subject, index }) => (
-                <TouchableOpacity
-                  style={[styles.moduleButton, styles.moduleButtonLayout]}
-                  onPress={() => handleModulePress(item.id, index)}
-                >
-                  <Text style={styles.moduleText}>{subject}</Text>
-                </TouchableOpacity>
-              )}
-            />
+              <FlatList
+                data={item.subjects}
+                keyExtractor={(subject, index) => index.toString()}
+                renderItem={({ item: subject, index }) => (
+                  <TouchableOpacity
+                    style={[styles.moduleButton, styles.moduleButtonLayout]}
+                    onPress={() => handleModulePress(item.id, index)}
+                  >
+                    <Text style={styles.moduleText}>{subject}</Text>
+                  </TouchableOpacity>
+                )}
+              />
             )}
           </View>
         )}
