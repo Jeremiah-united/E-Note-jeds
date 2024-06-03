@@ -34,7 +34,7 @@ const CollectionViewer = () => {
   };
 
   const handleModulePress = (yearId, moduleId) => {
-    navigation.navigate('ModuleInterface', { yearId, moduleId });
+    navigation.navigate('ModuleInterface', { yearId, moduleId, course });
   };
 
   return (
@@ -78,12 +78,14 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: "800",
     color: "#c2c2c2",
+    top: 20,
     fontSize: 36,
     textAlign: "center",
     textDecorationLine: "underline"
   },
   yearText: {
     fontSize: 20,
+    top: 5,
     fontWeight: 'bold',
     marginVertical: 8,
     color: "#c2c2c2"

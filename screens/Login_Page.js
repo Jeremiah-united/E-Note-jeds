@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, Image, ImageBackground } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -8,19 +8,45 @@ const Login_Page = () => {
 	const navigation = useNavigation();
   	
 	return (
+		<ImageBackground
+      source={require('../assets/paper background.jpg')}
+      style={styles.background}
+	  >
 		<View style={styles.loginPage}>
+		<View style={styles.topHalf}>	
+		<Image
+          source={require('../assets/E-Note-logo.png')}
+          style={styles.enote}
+          resizeMode="contain"
+        />
+		</View>
 		<TouchableOpacity style={styles.rectangleParent} onPress={() => [navigation.navigate("Sign_in")] }>
 		<View style={[styles.groupChild, styles.loginPosition]} />
 		<Text style={[styles.login, styles.loginPosition]}>Login</Text>
 		</TouchableOpacity>
-		</View>);
+		</View>
+		</ImageBackground>);
 		};
 
 const styles = StyleSheet.create({
+			background: {
+			flex: 1,
+			resizeMode: 'cover',
+		},
 			loginPosition: {
 			height: 60,
 			left: "50%",
 			position: "absolute"
+		},
+		topHalf: {
+			flex: 1,
+			top: 80,
+			left: 10,
+			alignItems: 'center',
+		},
+			enote: {
+			width: 150, // 50% of screen width
+			height: 150 // 50% of screen height
 		},
 			groupChild: {
 			marginLeft: -149.5,
@@ -55,11 +81,10 @@ const styles = StyleSheet.create({
 			position: "absolute"
 		},
 			loginPage: {
-			backgroundColor: "#006793",
+			backgroundColor: 'rgba(0,0,0,0.1)',
 			flex: 1,
-			width: "100%",
-			height: 800,
-			overflow: "hidden"
+			justifyContent: 'center',
+    		alignItems: 'center',
 		}
 	});
 export default Login_Page;

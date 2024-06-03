@@ -11,9 +11,9 @@ import Sign_in from "./screens/Sign_in";
 
 import Modules from "./screens/My_Modules";
 
-import NoteTest from './screens/TestNoter';
+import Notes from "./screens/Notes";
 
-import Notes from './screens/Notes';
+import NoteEditor from './screens/NoteEditor2';
 
 import CoursesList from "./screens/CoursesList";
 
@@ -25,11 +25,6 @@ import ModuleInterface from "./screens/ModuleInterface";
 
 import Todo from "./screens/Todo";
 
-//import AndroidLarge3 from "./Schedule";
-
-//import AndroidLarge5 from "./Goals";
-
-//import LoginScreen from "./Material_You";
 
 const App = () => {
 
@@ -39,19 +34,19 @@ const Stack = createNativeStackNavigator();
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView style={styles.container}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login_Page">
+      <Stack.Navigator initialRouteName="Login_Page" screenOptions={{ headerShown: false }}>
       <Stack.Screen component={Login_Page} name="Login_Page" />
       <Stack.Screen component={Sign_in} name="Sign_in" />
       <Stack.Screen component={Modules} name="My_Modules" />
-      <Stack.Screen component={NoteTest} name="TestNoter" />
       <Stack.Screen component={Notes} name="Notes" />
+      <Stack.Screen component={NoteEditor} name="NoteEditor2" />
       <Stack.Screen component={CoursesList} name="CoursesList" />
       <Stack.Screen component={CollectionViewer} name="CollectionViewer" />
       <Stack.Screen component={ModuleDetails} name="ModuleDetails" />
       <Stack.Screen component={ModuleInterface} name="ModuleInterface" />
       <Stack.Screen component={Todo} name="Todo" />
     </Stack.Navigator>
-    <StatusBar style="auto" />
+    <StatusBar style= "auto" />
   </NavigationContainer>
   </SafeAreaView>
   </GestureHandlerRootView>

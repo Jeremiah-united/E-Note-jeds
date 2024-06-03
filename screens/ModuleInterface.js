@@ -1,24 +1,45 @@
 // ModuleInterface.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getDatabase, ref, get } from 'firebase/database';
 
 const ModuleInterface = ({ route }) => {
-  const { yearId, moduleId } = route.params;
+  const { course, yearId, moduleId } = route.params;
   const navigation = useNavigation();
+  const [moduleName, setModuleName] = useState('');
+
+  useEffect(() => {
+    const fetchModuleName = async () => {
+      try {
+        const db = getDatabase();
+        const moduleRef = ref(db, `Courses/${course}/${yearId}/subjects/${moduleId}`);
+        const snapshot = await get(moduleRef);
+        if (snapshot.exists()) {
+          setModuleName(snapshot.val());
+        } else {
+          console.log('No such module!');
+        }
+      } catch (error) {
+        console.error('Error fetching module name: ', error);
+      }
+    };
+
+    fetchModuleName();
+  }, [course, yearId, moduleId]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{moduleId}</Text>
+      <Text style={styles.title}>{moduleName || 'Loading...'}</Text>
       <TouchableOpacity
         style={[styles.button, styles.buttonLayout]}
-        onPress={() => navigation.navigate('Notes', { yearId, moduleId })}
+        onPress={() => navigation.navigate('Notes', { course, yearId, moduleId })}
       >
         <Text style={styles.buttonText}>Notes</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.button, styles.buttonLayout]}
-        onPress={() => navigation.navigate('Todo', { yearId, moduleId })}
+        onPress={() => navigation.navigate('Todo', { course, yearId, moduleId })}
       >
         <Text style={styles.buttonText}>To-Do List</Text>
       </TouchableOpacity>
