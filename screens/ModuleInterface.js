@@ -9,7 +9,7 @@ const ModuleInterface = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Module Interface</Text>
+      <Text style={styles.title}>{moduleId}</Text>
       <TouchableOpacity
         style={[styles.button, styles.buttonLayout]}
         onPress={() => navigation.navigate('Notes', { yearId, moduleId })}
