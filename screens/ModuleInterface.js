@@ -11,13 +11,13 @@ const ModuleInterface = ({ route }) => {
     <View style={styles.container}>
       <Text style={styles.title}>Module Interface</Text>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, styles.buttonLayout]}
         onPress={() => navigation.navigate('Notes', { yearId, moduleId })}
       >
         <Text style={styles.buttonText}>Notes</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, styles.buttonLayout]}
         onPress={() => navigation.navigate('Todo', { yearId, moduleId })}
       >
         <Text style={styles.buttonText}>To-Do List</Text>
@@ -32,23 +32,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0c172c',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 24,
+    color: "#c2c2c2"
   },
   button: {
     padding: 16,
     marginVertical: 8,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#d9d9d9',
     borderRadius: 8,
     width: '80%',
     alignItems: 'center',
   },
+  buttonLayout: {
+    marginTop: 28,
+    height: 79,
+    borderRadius: 360,
+    width: 331,
+    alignContent: "center"
+  },
   buttonText: {
-    color: '#fff',
+    color: '#000',
     fontSize: 18,
   },
 });

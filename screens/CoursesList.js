@@ -24,11 +24,12 @@ const CoursesList = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>COURSES</Text>
       <FlatList
         data={courses}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity style={styles.courseButton} onPress={() => handleCoursePress(item)}>
+          <TouchableOpacity style={[styles.courseButton, styles.courseButtonLayout]} onPress={() => handleCoursePress(item)}>
             <Text style={styles.courseText}>{item}</Text>
           </TouchableOpacity>
         )}
@@ -41,18 +42,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0c172c',
   },
   courseButton: {
-    padding: 16,
-    marginVertical: 8,
-    backgroundColor: '#007BFF',
-    borderRadius: 8,
+    zIndex: 8,
+    backgroundColor: "#d9d9d9",
+    marginTop: 28,
+    alignSelf: "center",
+    alignContent: "center"
+  },
+  courseButtonLayout: {
+    marginTop: 28,
+    height: 79,
+    borderRadius: 360,
+    width: 331,
+    alignContent: "center"
+  },
+  header: {
+    fontWeight: "800",
+    color: "#c2c2c2",
+    fontSize: 36,
+    textAlign: "center",
+    textDecorationLine: "underline"
   },
   courseText: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center',
+    marginTop: 25,
+    letterSpacing: 1,
+    fontWeight: "700",
+    color: "#000",
+    fontSize: 20,
+    textAlign: "center"
   },
 });
 

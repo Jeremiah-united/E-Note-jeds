@@ -1,18 +1,20 @@
 // CollectionViewer.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { getDatabase, ref, onValue } from 'firebase/database';
-import { useNavigation } from '@react-navigation/native';
+import { ref, onValue } from 'firebase/database';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { database } from '../Firebase';
 
 const CollectionViewer = () => {
   const [years, setYears] = useState([]);
+  const route = useRoute();
   const [expandedYears, setExpandedYears] = useState({});
   const navigation = useNavigation();
+  const { path } = route.params;
 
   useEffect(() => {
     const fetchYears = () => {
-      const db = getDatabase();
-      const coursesRef = ref(db, 'Courses/Electrical'); // Adjust path if necessary
+      const coursesRef = ref(database, path);
       onValue(coursesRef, (snapshot) => {
         const data = snapshot.val();
         if (data) {
@@ -23,7 +25,7 @@ const CollectionViewer = () => {
     };
 
     fetchYears();
-  }, []);
+  }, [path]);
 
   const handleYearPress = (yearId) => {
     setExpandedYears(prevState => ({
@@ -38,27 +40,28 @@ const CollectionViewer = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>{path}</Text>
       <FlatList
         data={years}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View>
             <TouchableOpacity onPress={() => handleYearPress(item.id)}>
-              <Text style={styles.yearText}>{item.id}</Text>
+            <Text style={styles.yearText}>{item.id}</Text>
             </TouchableOpacity>
             {expandedYears[item.id] && (
-              <FlatList
-                data={item.subjects}
-                keyExtractor={(subject, index) => index.toString()}
-                renderItem={({ item: subject, index }) => (
-                  <TouchableOpacity
-                    style={styles.moduleButton}
-                    onPress={() => handleModulePress(item.id, index)}
-                  >
-                    <Text style={styles.moduleText}>{subject}</Text>
-                  </TouchableOpacity>
-                )}
-              />
+            <FlatList
+              data={item.subjects}
+              keyExtractor={(subject, index) => index.toString()}
+              renderItem={({ item: subject, index }) => (
+                <TouchableOpacity
+                  style={[styles.moduleButton, styles.moduleButtonLayout]}
+                  onPress={() => handleModulePress(item.id, index)}
+                >
+                  <Text style={styles.moduleText}>{subject}</Text>
+                </TouchableOpacity>
+              )}
+            />
             )}
           </View>
         )}
@@ -71,21 +74,37 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0c172c',
+  },
+  header: {
+    fontWeight: "800",
+    color: "#c2c2c2",
+    fontSize: 36,
+    textAlign: "center",
+    textDecorationLine: "underline"
   },
   yearText: {
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 8,
+    color: "#c2c2c2"
   },
   moduleButton: {
     padding: 16,
     marginVertical: 4,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#d9d9d9',
     borderRadius: 8,
   },
+  moduleButtonLayout: {
+    marginTop: 28,
+    height: 79,
+    borderRadius: 360,
+    width: 331,
+    alignContent: "center",
+    alignSelf: "center"
+  },
   moduleText: {
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     textAlign: 'center',
   },
